@@ -6,6 +6,14 @@ import AppointmentsRepository from '../repositories/AppointmentsRepository';
 const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
 
+// SoC: Separation of Concerns ( Separação de preocupações)
+
+appointmentsRouter.get('/', (request, response) => {
+  const appoitments = appointmentsRepository.all();
+
+  return response.json(appoitments);
+});
+
 appointmentsRouter.post('/', (request, response) => {
   const { provider, date } = request.body;
 
