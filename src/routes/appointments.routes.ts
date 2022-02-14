@@ -6,6 +6,7 @@ import AppointmentsRepository from '../repositories/AppointmentsRepository';
 const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
 
+// DTO - Data Transfer Object
 // SoC: Separation of Concerns ( Separação de preocupações)
 
 appointmentsRouter.get('/', (request, response) => {
@@ -28,7 +29,10 @@ appointmentsRouter.post('/', (request, response) => {
       .status(400)
       .json({ message: 'This appointment is already booked' });
   }
-  const appointment = appointmentsRepository.create(provider, parsedDate);
+  const appointment = appointmentsRepository.create({
+    provider,
+    date: parsedDate,
+  });
 
   return response.json(appointment);
 });
